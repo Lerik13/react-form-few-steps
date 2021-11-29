@@ -11,21 +11,25 @@ export const Step1 = () => {
 		mode: "onBlur", // Validation start when element is unfocused
 	})
 
+	const onSubmit = (data) => {
+		console.log(data);
+	}
+
 	return (
 		<MainContainer>
 			<Typography component="h2" variant="h5">
 				🌞 Step 1
 			</Typography>
- 			<Form>
+ 			<Form onSubmit={handleSubmit(onSubmit)}>
 				<Input
-					ref={register('firstName')}
+					{...register('firstName')}
 					id="firstName"
 					type="text"
 					label="First Name"
 					name="firstName"
 				/>
 				<Input
-					ref={register('lastName')}
+					{...register('lastName')}
 					id="lastName"
 					type="text"
 					label="Last Name"
