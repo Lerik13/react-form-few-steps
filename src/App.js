@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Header } from './components/Header'
+import { Step1 } from './Step1'
 //import './App.css';
 
-const Step1 = () => <>Step 1</>
 const Step2 = () => <>Step 2</>
 const Step3 = () => <>Step 3</>
 const Result = () => <>Result</>
