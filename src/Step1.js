@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,14 +23,16 @@ const schema = yup.object().shape({
 });
 
 export const Step1 = () => {
+	
+	const navigate = useNavigate();
+
 	const { register, handleSubmit, formState: { errors } } = useForm({
 		mode: "onBlur", // Validation start when element is unfocused
 		resolver: yupResolver(schema)
-	})
+	});
 
 	const onSubmit = (data) => {
-		console.log(data);
-		//console.log('errors = ', errors);
+		navigate("/step2")
 	}
 
 	return (
