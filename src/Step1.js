@@ -8,6 +8,7 @@ import { MainContainer } from './components/MainContainer';
 import { Form } from './components/Form';
 import Input from './components/Input';
 import PrimaryButton from './components/PrimaryButton';
+import { useData } from './DataContext';
 
 const schema = yup.object().shape({
 	firstName: yup
@@ -25,14 +26,17 @@ const schema = yup.object().shape({
 export const Step1 = () => {
 	
 	const navigate = useNavigate();
+	const {data, setValues} = useData()
 
 	const { register, handleSubmit, formState: { errors } } = useForm({
+		defaultValues: { firstName: data.firstName, lastName: data.lastName },
 		mode: "onBlur", // Validation start when element is unfocused
 		resolver: yupResolver(schema)
 	});
 
 	const onSubmit = (data) => {
 		navigate("/step2")
+		setValues(data)
 	}
 
 	return (

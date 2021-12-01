@@ -11,6 +11,7 @@ import PrimaryButton from './components/PrimaryButton';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Typography, FormControlLabel, Checkbox } from '@material-ui/core';
 import parsePhoneNumberFromString from 'libphonenumber-js';
+import { useData } from './DataContext';
 
 const schema = yup.object().shape({
 	email: yup
@@ -32,8 +33,10 @@ const normalizePhoneNumber = (value) => {
 
 export const Step2 = () => {
 	const navigate = useNavigate();
+	const { data, setValues } = useData()
 
 	const { register, handleSubmit, formState: { errors }, watch } = useForm({
+		defaultValues: { email: data.email, hasPhone: data.hasPhone, phoneNumber: data.phoneNumber },
 		mode: "onBlur",
 		resolver: yupResolver(schema)
 	});
@@ -41,6 +44,7 @@ export const Step2 = () => {
 	const hasPhone = watch("hasPhone")
 
 	const onSubmit = (data) => {
+		setValues(data)
 		navigate("/step3")
 	}
 
@@ -63,7 +67,7 @@ export const Step2 = () => {
 
 				<FormControlLabel
 					control={
-						<Checkbox name="hasPhone" {...register('hasPhone')} color="primary" />
+						<Checkbox defaultChecked={data.hasPhone} name="hasPhone" {...register('hasPhone')} color="primary" />
 					}
 					label="Do you have a phone"
 				/>
